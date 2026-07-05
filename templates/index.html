@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Network Port Scanner</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static',filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🌐 Network Port Scanner</h1>
+
+<form method="POST">
+
+<input
+type="text"
+name="host"
+placeholder="Enter Domain or IP"
+required>
+
+<button type="submit">
+Scan
+</button>
+
+</form>
+
+{% if error %}
+<p>{{error}}</p>
+{% endif %}
+
+{% if results %}
+
+<div class="summary">
+
+<h2>Target: {{host}}</h2>
+
+<h3>IP Address: {{ip}}</h3>
+
+<h3>Total Open Ports: {{total}}</h3>
+
+</div>
+
+<table>
+
+<tr>
+<th>Port</th>
+<th>Service</th>
+<th>Status</th>
+</tr>
+
+{% for result in results %}
+
+<tr>
+
+<td>{{result.port}}</td>
+<td>{{result.service}}</td>
+<td>{{result.status}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
